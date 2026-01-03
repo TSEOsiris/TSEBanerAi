@@ -1,0 +1,140 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <!--Bannerlord Target-->
+    <TargetFramework>net472</TargetFramework>
+    <LangVersion>10.0</LangVersion>
+    <Nullable>disable</Nullable>
+    <PlatformTarget>x64</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+    
+    <!--Module Folder Path-->
+    <GameFolder>C:\TSEBanerAi\Mount &amp; Blade II Bannerlord</GameFolder>
+    <ModuleOutputPath>$(GameFolder)\Modules\TSEBanerAi\bin\Win64_Shipping_Client</ModuleOutputPath>
+    
+    <!--Enable Hot Reload-->
+    <AssemblyName>TSEBanerAi</AssemblyName>
+    <RootNamespace>TSEBanerAi</RootNamespace>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <!--Build Configuration-->
+  <PropertyGroup Condition="'$(Configuration)'=='Debug'">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>portable</DebugType>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)'=='Release'">
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+
+  <!--Game References-->
+  <ItemGroup>
+    <Reference Include="TaleWorlds.*.dll">
+      <HintPath>$(GameFolder)\bin\Win64_Shipping_Client\TaleWorlds.*.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    
+    <Reference Include="TaleWorlds.CampaignSystem">
+      <HintPath>$(GameFolder)\bin\Win64_Shipping_Client\TaleWorlds.CampaignSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    
+    <Reference Include="TaleWorlds.Core">
+      <HintPath>$(GameFolder)\bin\Win64_Shipping_Client\TaleWorlds.Core.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    
+    <Reference Include="TaleWorlds.Engine">
+      <HintPath>$(GameFolder)\bin\Win64_Shipping_Client\TaleWorlds.Engine.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    
+    <Reference Include="TaleWorlds.Library">
+      <HintPath>$(GameFolder)\bin\Win64_Shipping_Client\TaleWorlds.Library.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    
+    <Reference Include="TaleWorlds.Localization">
+      <HintPath>$(GameFolder)\bin\Win64_Shipping_Client\TaleWorlds.Localization.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    
+    <Reference Include="TaleWorlds.MountAndBlade">
+      <HintPath>$(GameFolder)\bin\Win64_Shipping_Client\TaleWorlds.MountAndBlade.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+
+  <!--System References-->
+  <ItemGroup>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+  </ItemGroup>
+
+  <!--NuGet Dependencies-->
+  <ItemGroup>
+    <!-- Removed Bannerlord.BuildResources - not available in required version -->
+    <PackageReference Include="Bannerlord.ReferenceAssemblies.Core" Version="1.2.9.*">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>compile</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Lib.Harmony" Version="2.2.2">
+      <PrivateAssets>none</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3">
+      <PrivateAssets>none</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="System.Data.SQLite.Core" Version="1.0.118">
+      <PrivateAssets>none</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+  
+  <!-- Ensure all dependencies are copied to output -->
+  <PropertyGroup>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <!--Copy to Module Folder on Build-->
+  <Target Name="CopyToModuleFolder" AfterTargets="Build">
+    <ItemGroup>
+      <FilesToCopy Include="$(TargetPath)" />
+      <FilesToCopy Include="$(TargetDir)$(TargetName).pdb" Condition="'$(Configuration)'=='Debug'" />
+      <FilesToCopy Include="SubModule.xml" />
+      <!-- Copy SQLite managed DLL -->
+      <FilesToCopy Include="$(TargetDir)System.Data.SQLite.dll" />
+      <!-- Copy Newtonsoft.Json DLL -->
+      <FilesToCopy Include="$(TargetDir)Newtonsoft.Json.dll" />
+      <!-- Copy Harmony DLL -->
+      <FilesToCopy Include="$(TargetDir)0Harmony.dll" />
+    </ItemGroup>
+    
+    <Copy SourceFiles="@(FilesToCopy)" DestinationFolder="$(ModuleOutputPath)" SkipUnchangedFiles="true" />
+    
+    <!-- Copy SQLite native interop DLL (x64) -->
+    <ItemGroup>
+      <SQLiteNative Include="$(TargetDir)x64\SQLite.Interop.dll" Condition="Exists('$(TargetDir)x64\SQLite.Interop.dll')" />
+    </ItemGroup>
+    <MakeDir Directories="$(ModuleOutputPath)\x64" Condition="@(SQLiteNative) != ''" />
+    <Copy SourceFiles="@(SQLiteNative)" DestinationFolder="$(ModuleOutputPath)\x64" SkipUnchangedFiles="true" Condition="@(SQLiteNative) != ''" />
+    
+    <Message Importance="high" Text="Mod deployed to: $(ModuleOutputPath)" />
+  </Target>
+
+</Project>
+

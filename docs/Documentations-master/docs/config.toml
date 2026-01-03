@@ -1,0 +1,53 @@
+baseUrl = "https://moddocs.bannerlord.com/"
+languageCode = "en-us"
+DefaultContentLanguage = "en"
+hasCJKLanguage = true
+title = "Taleworlds Documentation"
+theme = "hugo-theme-docdock-master"
+pygmentsCodeFences = true
+pygmentsStyle = "monokailight"
+
+defaultContentLanguage = "en"
+defaultContentLanguageInSubdir= false
+enableMissingTranslationPlaceholders = false
+
+[languages]
+    [languages.en]
+        contentDir = "content/english"
+        languageName = "English"
+    [languages.zh_cn]
+        contentDir = "content/schinese"
+        languageName = "简体中文"
+    [languages.ru]
+        contentDir = "content/russian"
+        languageName = "Русский"
+
+# Add more languages here
+
+
+[outputs]
+home = ["HTML", "RSS", "JSON"]
+
+[[menu.shortcuts]]
+name = "<i class='fa fa-code'></i> <label>API Documentation</label>"
+identifier = "blapi"
+url = "https://apidoc.bannerlord.com/"
+weight = 10
+
+[[menu.shortcuts]]
+name = "<i class='fa fa-comment'></i> <label>Discuss on Forums</label>"
+identifier = "blforums"
+url = "https://forums.taleworlds.com/index.php?forums/the-smithy-mod-development.643/"
+weight = 20
+
+[[menu.shortcuts]]
+name = "<i class='fa-brands fa-discord fa-xl'></i> <label>&nbsp;Discuss on Discord</label>"
+identifier = "bldiscord"
+url = "https://discord.gg/ykFVJGQ"
+weight = 30
+
+[[menu.shortcuts]]
+name = "<i class='fa-brands fa-github fa-xl'></i> <label>&nbsp;Contribute on GitHub</label>"
+identifier = "blgithub"
+url = "https://github.com/TaleWorlds/Documentations"
+weight = 40

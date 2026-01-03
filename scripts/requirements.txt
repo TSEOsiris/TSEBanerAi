@@ -1,0 +1,14 @@
+# Requirements for wiki scraping and dataset generation
+
+# Web scraping
+requests>=2.31.0
+beautifulsoup4>=4.12.0
+lxml>=4.9.0
+cloudscraper>=1.2.71  # Bypass Cloudflare protection (alternative method)
+selenium>=4.15.0  # Real browser automation (recommended for Cloudflare)
+webdriver-manager>=4.0.0  # Auto-download ChromeDriver
+
+# For future dataset generation
+# numpy>=1.24.0
+# pandas>=2.0.0
+

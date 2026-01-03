@@ -1,0 +1,122 @@
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.userprefs
+
+# Rider
+.idea/
+
+# NuGet
+*.nupkg
+**/packages/*
+!**/packages/build/
+*.nuget.props
+*.nuget.targets
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Build
+*.dll
+*.exe
+*.pdb
+*.cache
+*.ilk
+*.log
+*.lib
+*.sbr
+*.scc
+*.vspscc
+*.vssscc
+
+# Test Results
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+*.trx
+*.VisualState.xml
+TestResult.xml
+
+# Misc
+*.pidb
+*.svclog
+*.scc
+*.aps
+*.ncb
+*.opensdf
+*.sdf
+*.cachefile
+*.psess
+*.vsp
+*.vspx
+*.coverage
+*.coveragexml
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Bannerlord specific - don't commit game data
+Mount & Blade II Bannerlord/
+
+# SQLite databases (campaign specific)
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+
+# Exported data (generated)
+**/Data/Database/*.json
+
+# But keep settings templates
+!**/Data/Settings/*.json
+
+# Logs
+*.log
+
+# Cursor IDE
+.cursor/
+
+# Environment
+.env
+.env.local
+
+# Large data folders (training data, models, etc.)
+Database/
+dataset_export/
+finetuning_data/
+models/
+outputs/
+outputs_full/
+outputs_v2/
+outputs_v2_gguf/
+unsloth-December-2025/
+unsloth_compiled_cache/
+venv_py312/
+wiki_data/
+
+# Training logs
+training_log.txt
+training_v2_log.txt
+test_output.txt
+test_results_*.txt

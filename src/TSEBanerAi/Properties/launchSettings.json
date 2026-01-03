@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "TSEBanerAi": {
+      "commandName": "Executable",
+      "executablePath": "C:\\TSEBanerAi\\Mount & Blade II Bannerlord\\bin\\Win64_Shipping_Client\\Bannerlord.exe",
+      "commandLineArgs": "/singleplayer _MODULES_*Bannerlord.Harmony*BetterExceptionWindow*Bannerlord.ButterLib*Bannerlord.UIExtenderEx*Bannerlord.MBOptionScreen*Native*SandBoxCore*Sandbox*StoryMode*NavalDLC*BirthAndDeath*TSEBanerAi*_MODULES_",
+      "workingDirectory": "C:\\TSEBanerAi\\Mount & Blade II Bannerlord\\bin\\Win64_Shipping_Client\\",
+      "nativeDebugging": true
+    }
+  }
+}
