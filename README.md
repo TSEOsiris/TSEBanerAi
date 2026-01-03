@@ -4,7 +4,7 @@ AI-powered NPC dialogues and dynamic events for Mount & Blade II: Bannerlord wit
 
 ## 🎯 Goals
 
-- ⚡ **Fast**: 5-7K token prompts (vs AIInfluence 14K)
+- ⚡ **Fast**: 5-7K token prompts
 - 🤖 **Smart**: Context-aware filtering and RAG
 - 🎭 **Natural**: Dynamic personalities and relationships
 - 🔧 **Flexible**: Multiple LLM backends support
